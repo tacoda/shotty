@@ -45,3 +45,5 @@ Use like a CLI:
 `shotty instances list`
 
 Distribute via PyPI, S3 or system repos
+
+`pip3` can install from a URL (relevant if hosting on S3)
