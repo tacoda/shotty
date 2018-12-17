@@ -51,6 +51,8 @@ def list_snapshots(project):
                     s.progress,
                     s.start_time.strftime("%c"))))
 
+                if s.state == 'completed': break
+
     return
 
 @cli.group('volumes')
