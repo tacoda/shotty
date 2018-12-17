@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import boto3
 import click
 
+# TODO: Replace env with yaml
 load_dotenv
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -14,6 +15,16 @@ session = boto3.Session(
 )
 ec2 = session.resource('ec2')
 
+def filter_instances(project):
+    instances = []
+    if project:
+        filters = [{'Name':'tag:Project', 'Values':[project]}]
+        instances = ec2.instances.filter(Filters=filters)
+    else:
+        instances = ec2.instances.all()
+
+    return instances
+
 @click.group()
 def instances():
     """Commands for instances"""
@@ -23,13 +34,7 @@ def instances():
     help="Only instances for project (tag Project:<name>)")
 def list_instances(project):
     "List EC2 instances"
-    instances = []
-    if project:
-        filters = [{'Name':'tag:Project', 'Values':[project]}]
-        instances = ec2.instances.filter(Filters=filters)
-    else:
-        instances = ec2.instances.all()
-
+    instances = filter_instances(project)
     for i in instances:
         tags = { t['Key']: t['Value'] for t in i.tags or [] }
         print(', '.join((
@@ -47,13 +52,7 @@ def list_instances(project):
     help="Only instances for project (tag Project:<name>)")
 def stop_instances(project):
     "Stop EC2 instances"
-    instances = []
-    if project:
-        filters = [{'Name':'tag:Project', 'Values':[project]}]
-        instances = ec2.instances.filter(Filters=filters)
-    else:
-        instances = ec2.instances.all()
-
+    instances = filter_instances(project)
     for i in instances:
         print("Stopping {0}...".format(i.id))
         i.stop()
