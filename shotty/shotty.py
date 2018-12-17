@@ -5,6 +5,23 @@ import botocore
 import click
 
 # TODO: Replace env with yaml
+# TODO: Add ability to reboot instances
+# TODO: Add --force flag to instances stop, start, snapshot and reboot
+#   If project isn't set, exit the command with error unless --force is set
+# TODO: Add a --profile option to cli group which lets you specify a different profile
+# TODO: Use a try/except block to catch botocore.execptions.ClientError when creating snapshots
+#   print an error message
+# TODO: Add an instance argument to the appropriate commands so they only target one instance
+#   shotty volumes list --instance=i-123
+# TODO: After a snapshot, only start intances that were running before the snapshot was taken
+# TODO: Add an optional age parameter to the snapshot command that takes an age in days and only
+#   volumes whose last successful snapshot is older than that many days
+#       shotty instances snapshot --age 7 --project Valkyrie
+# TODO: When taking a snapshot, don't stop and instance unless the script will snapshot one of its volumes
+# TODO: Add a region parameter to all commands that will let the user override the region
+#   set in their AWS CLI configuration profile
+#       shotty --region us-east-1 instances list
+
 load_dotenv
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
