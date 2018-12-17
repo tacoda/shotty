@@ -8,15 +8,15 @@ TODO: YAML
 
 ## Running
 
-`pipenv run python src/shotty.py <command> <--project=PROJECT>`
+`pipenv run python src/shotty.py <command> <subcommand> <--project=PROJECT>`
 
 Information below is available in help
 
 ### Commands
 
-- `list`
-- `start`
-- `stop`
+- `instances`
+- `volumes`
+- `snapshots`
 
 ### Options
 
