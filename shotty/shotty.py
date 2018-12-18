@@ -1,10 +1,7 @@
-import os
-from dotenv import load_dotenv
 import boto3
 import botocore
 import click
 
-# TODO: Replace env with yaml
 # TODO: Add ability to reboot instances
 # TODO: Add --force flag to instances stop, start, snapshot and reboot
 #   If project isn't set, exit the command with error unless --force is set
@@ -22,15 +19,7 @@ import click
 #   set in their AWS CLI configuration profile
 #       shotty --region us-east-1 instances list
 
-load_dotenv
-
-AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-
-session = boto3.Session(
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-)
+session = boto3.Session()
 ec2 = session.resource('ec2')
 
 def filter_instances(project):
