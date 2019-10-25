@@ -2,15 +2,17 @@
 
 Tool to manage AWS EC2 snapshots
 
-## Configuring
+## Installation
+
+```sh
+pip3 install https://s3.amazonaws.com/tacoda-dist/shotty/shotty-0.1-py3-none-any.whl
+```
+
+## Configuration
 
 TODO: YAML
 
-## Running
-
-`pipenv run python src/shotty.py <command> <subcommand> <--project=PROJECT>`
-
-Information below is available in help
+## Usage
 
 ### Commands
 
@@ -22,9 +24,19 @@ Information below is available in help
 
 - `project`
 
+## Building From Source
+
+### Running Locally
+
+`pipenv run python src/shotty.py <command> <subcommand> <--project=PROJECT>`
+
+Information below is available in help
+
 ### Building with `setuptools`
 
-`pipenv install -d setuptools`
+```sh
+pipenv install -d setuptools
+```
 
 Setup script is in `setup.py`
 
